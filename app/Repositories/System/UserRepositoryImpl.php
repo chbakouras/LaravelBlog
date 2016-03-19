@@ -3,8 +3,10 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Repositories;
+namespace App\Repositories\System;
 
+
+use App\Repositories\AbstractRepository;
 
 class UserRepositoryImpl extends AbstractRepository implements UserRepository
 {

@@ -1,7 +1,7 @@
 # Laravel Bootstrap Blog
 
-A simple blog
+A bootstrap blog app, build with Laravel 5.2
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The LaravelBlog is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

@@ -3,7 +3,8 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Repositories;
+namespace App\Repositories\System;
+use App\Repositories\Repository;
 
 /**
  * Interface PostRepository
