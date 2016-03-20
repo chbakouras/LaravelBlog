@@ -6,13 +6,18 @@
 </head>
 <body>
 @include('partials.admin-header')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 navbar-default sidebar" role="navigation">
-            @include('partials.sidebar')
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 content">
-            @yield('content')
+<div id="wrapper" class="admin">
+    <div id="sidebar-wrapper">
+        @include('partials.admin-left-sidebar')
+    </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 content">
+                    @yield('content')
+                </div>
+            </div>
         </div>
     </div>
     @include('partials.footer')
