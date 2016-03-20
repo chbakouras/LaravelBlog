@@ -19,3 +19,22 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'slug' => $faker->word,
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+    ];
+});
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'content' => $faker->text($maxNbChars = 500),
+        'excerpt' => $faker->text($maxNbChars = 100),
+        'slug' => $faker->word,
+        'category_id' => $faker->numberBetween(1, 20),
+        'author_id' => 1,
+    ];
+});

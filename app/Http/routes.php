@@ -33,6 +33,8 @@ Route::group(['middleware' => ['web']], function () {
     // Admin section.
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin', 'System\AdminController@index');
+
+        Route::resource('/posts', 'System\PostController');
     });
 });
 
