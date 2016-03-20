@@ -7,9 +7,23 @@ namespace App\Http\Controllers\System;
 
 
 use App\Http\Controllers\Controller;
+use App\Repositories\System\OptionRepository;
 
 class AdminController extends Controller
 {
+    protected $optionRepository;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param OptionRepository $optionRepository
+     * @internal param PostRepository $postRepository
+     */
+    public function __construct(OptionRepository $optionRepository)
+    {
+        $this->optionRepository = $optionRepository;
+    }
+
     /**
      * Display the admin page.
      *
@@ -17,6 +31,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $siteName = $this->optionRepository->findOptionValueByName('site-name');
+
+        return view('admin.dashboard')->with('siteName', $siteName);
     }
 }

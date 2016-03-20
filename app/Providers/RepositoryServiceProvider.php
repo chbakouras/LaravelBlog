@@ -16,6 +16,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\System\UserRepository', 'App\Repositories\System\UserRepositoryImpl');
         $this->app->bind('App\Repositories\System\CategoryRepository', 'App\Repositories\System\CategoryRepositoryImpl');
         $this->app->bind('App\Repositories\System\PostRepository', 'App\Repositories\System\PostRepositoryImpl');
+        $this->app->bind('App\Repositories\System\OptionRepository', 'App\Repositories\System\OptionRepositoryImpl');
     }
 
     /**

@@ -5,7 +5,7 @@
     @yield('add-to-head')
 </head>
 <body>
-@if(Helpers::sectionExists('sidebar-right'))
+@if($sidebarRight)
     <?php
     $content_class = "col-lg-6 col-md-6";
     $sidebar_right = true;
@@ -18,23 +18,21 @@
 @endif
 @include('theme.partials.header')
 <div id="wrapper">
-    <div id="left-sidebar" class="col-lg-3 col-md-3">
-        @include('theme.partials.sidebar-left')
-    </div>
-    <div id="content-wrapper" class="{{ $content_class }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 content">
-                    @yield('content')
-                </div>
+    <div class="container">
+        <div class="row">
+            <div id="left-sidebar" class="col-lg-3 col-md-3">
+                @include('theme.partials.sidebar-left')
             </div>
+            <div id="content-wrapper" class="{{ $content_class }}">
+                @yield('content')
+            </div>
+            @if($sidebarRight)
+                <div id="right-sidebar" class="col-md-3">
+                    @yield('sidebar-right')
+                </div>
+            @endif
         </div>
     </div>
-    @if($sidebar_right)
-    <div id="right-sidebar" class="col-md-3">
-        @yield('sidebar-right')
-    </div>
-    @endif
 </div>
 @include('theme.partials.footer')
 

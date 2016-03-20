@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->longText('content');
             $table->text('excerpt');
             $table->string('slug');
+            $table->string('type');
             $table->integer('author_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->timestamps();

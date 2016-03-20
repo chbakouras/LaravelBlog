@@ -34,6 +34,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'content' => $faker->text($maxNbChars = 500),
         'excerpt' => $faker->text($maxNbChars = 100),
         'slug' => $faker->word,
+        'type' => $faker->word,
         'category_id' => $faker->numberBetween(1, 20),
         'author_id' => 1,
     ];

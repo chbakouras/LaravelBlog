@@ -4,22 +4,27 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Repositories\System\OptionRepository;
 use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Config;
 
 class PostController extends Controller
 {
     protected $postRepository;
+    protected $optionRepository;
 
     /**
      * Create a new controller instance.
      *
      * @param  PostRepository $postRepository
+     * @param OptionRepository $optionRepository
      */
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, OptionRepository $optionRepository)
     {
+        $this->optionRepository = $optionRepository;
         $this->postRepository = $postRepository;
     }
 
@@ -64,7 +69,13 @@ class PostController extends Controller
     {
         $post = $this->postRepository->find($id);
 
-        return view('theme.posts.show')->with('post', $post);
+        $sidebarRight = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-right');
+        $sidebarLeft = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-left');
+
+        return view('theme.posts.show')
+            ->with('post', $post)
+            ->with('sidebarRight', $sidebarRight)
+            ->with('sidebarLeft', $sidebarLeft);
     }
 
     /**
