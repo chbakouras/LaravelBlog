@@ -3,12 +3,25 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class PostController extends Controller
 {
+    protected $posts;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  PostRepository $posts
+     */
+    public function __construct(PostRepository $posts)
+    {
+        $this->posts = $posts;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +29,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = $this->posts->all();
+        dd($posts);
     }
 
     /**

@@ -10,5 +10,5 @@ use App\Repositories\AbstractRepository;
 
 class CategoriesRepositoryImpl extends AbstractRepository implements CategoriesRepository
 {
-
+    protected $modelClassName = '\App\Models\Category';
 }

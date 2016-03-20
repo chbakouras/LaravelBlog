@@ -10,7 +10,7 @@ use App\Repositories\AbstractRepository;
 
 class UserRepositoryImpl extends AbstractRepository implements UserRepository
 {
-    protected $modelClassName = 'User';
+    protected $modelClassName = '\App\Models\User';
 
     public function findUserByUsername($username)
     {
