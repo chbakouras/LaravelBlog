@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 
@@ -10,16 +11,16 @@ use App\Http\Requests;
 
 class PostController extends Controller
 {
-    protected $posts;
+    protected $postRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  PostRepository $posts
+     * @param  PostRepository $postRepository
      */
-    public function __construct(PostRepository $posts)
+    public function __construct(PostRepository $postRepository)
     {
-        $this->posts = $posts;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -29,8 +30,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->all();
-        dd($posts);
+        //
     }
 
     /**
@@ -62,7 +62,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = $this->postRepository->find($id);
+
+        return view('theme.posts.show')->with('post', $post);
     }
 
     /**

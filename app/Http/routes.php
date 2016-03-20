@@ -34,7 +34,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin', 'System\AdminController@index');
 
-        Route::resource('/posts', 'System\PostController');
+        Route::resource('/posts', 'System\PostController', ['except' => ['show']]);
     });
+
+    // Blog - public
+    Route::resource('/posts', 'System\PostController', ['only' => ['show']]);
 });
 

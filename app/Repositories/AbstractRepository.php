@@ -30,7 +30,7 @@ abstract class AbstractRepository implements Repository
 
     public function find($id, $columns = array('*'))
     {
-        return call_user_func_array("{$this->modelClassName}::find", array($columns));
+        return call_user_func_array("{$this->modelClassName}::find", array($id, $columns));
     }
 
     public function destroy($ids)
