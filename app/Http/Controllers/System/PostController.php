@@ -39,7 +39,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = $this->postRepository->eagerLoadAllPaginated(array('categories', 'author'));
+        $siteName = $this->optionRepository->findOptionStringValueByName('site-name');
+
+        return view('admin.posts')->with('posts', $posts)->with('siteName', $siteName);
     }
 
     /**

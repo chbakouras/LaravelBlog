@@ -21,4 +21,6 @@ interface Repository
     public function find($id, $columns = array('*'));
 
     public function destroy($ids);
+
+    public function findAllPaginated($perPage = 20);
 }

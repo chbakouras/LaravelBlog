@@ -23,11 +23,11 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo('User', 'author_id');
+        return $this->belongsTo('App\Models\User', 'author_id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category');
+        return $this->belongsToMany('App\Models\Category');
     }
 }

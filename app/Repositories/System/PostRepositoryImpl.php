@@ -24,4 +24,18 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
 
         return $where->first();
     }
+
+    public function findAllWithTypePaginated($type = 'post', $perPage = 20)
+    {
+        $where = call_user_func_array("{$this->modelClassName}::where", array('type', $type));
+
+        return $where->paginate($perPage);
+    }
+
+    public function eagerLoadAllPaginated($array, $perPage = 20)
+    {
+        $where = call_user_func_array("{$this->modelClassName}::with", $array);
+
+        return $where->paginate($perPage);
+    }
 }

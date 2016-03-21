@@ -16,4 +16,8 @@ use App\Repositories\Repository;
 interface PostRepository extends Repository
 {
     public function findBySlug($postSlug);
+
+    public function findAllWithTypePaginated($type = 'post', $perPage = 20);
+
+    public function eagerLoadAllPaginated($array, $perPage = 20);
 }

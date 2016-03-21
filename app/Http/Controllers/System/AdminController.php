@@ -29,9 +29,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashboard()
     {
-        $siteName = $this->optionRepository->findOptionValueByName('site-name');
+        $siteName = $this->optionRepository->findOptionStringValueByName('site-name');
 
         return view('admin.dashboard')->with('siteName', $siteName);
     }

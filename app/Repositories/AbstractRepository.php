@@ -37,4 +37,9 @@ abstract class AbstractRepository implements Repository
     {
         return call_user_func_array("{$this->modelClassName}::destroy", array($ids));
     }
+
+    public function findAllPaginated($perPage = 20)
+    {
+        return call_user_func_array("{$this->modelClassName}::paginate", array($perPage));
+    }
 }
