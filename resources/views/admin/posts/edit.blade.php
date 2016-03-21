@@ -1,19 +1,18 @@
 @extends('admin.admin')
 
 @section('add-to-head')
-    <title>Posts</title>
+    <title>Edit</title>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 @endsection
 
 @section('content')
-    <h1>Edit</h1>
-
+    <h1>Edit {{ $post->type }}</h1>
+    <textarea title="editor" id="editor" style="width:100%; min-height:400px">
+        {{ $post->content }}
+    </textarea>
 @endsection
 
 @section('scripts')
-    <script>
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+    <script src="{{ asset('js/editor.js') }}"></script>
+    <script src="{{ asset('js/menu.js') }}"></script>
 @endsection
