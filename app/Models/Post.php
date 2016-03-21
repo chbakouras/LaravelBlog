@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Post
+ * @property mixed type
  * @package App\Models
  */
 class Post extends Model

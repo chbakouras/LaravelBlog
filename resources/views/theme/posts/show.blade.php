@@ -7,6 +7,7 @@
 
 @section('content')
     {{ $post->content }}
+    {{ $post->type }}
 @endsection
 
 @if($sidebarLeft)

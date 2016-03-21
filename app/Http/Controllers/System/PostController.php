@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Config;
 class PostController extends Controller
 {
     protected $postRepository;
-    protected $optionRepository;
     protected $categoryRepository;
+    protected $optionRepository;
 
     /**
      * Create a new controller instance.
@@ -27,9 +27,9 @@ class PostController extends Controller
      */
     public function __construct(PostRepository $postRepository, OptionRepository $optionRepository, CategoryRepository $categoryRepository)
     {
-        $this->optionRepository = $optionRepository;
         $this->postRepository = $postRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->optionRepository = $optionRepository;
     }
 
     /**
@@ -73,27 +73,24 @@ class PostController extends Controller
     {
         $post = $this->postRepository->find($id);
 
-        $sidebarRight = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-right');
-        $sidebarLeft = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-left');
-
         return view('theme.posts.show')
             ->with('post', $post)
-            ->with('sidebarRight', $sidebarRight)
-            ->with('sidebarLeft', $sidebarLeft);
+            ->with($this->getOptions($post->type));
     }
 
+    /**
+     * @param $categorySlug
+     * @param $postSlug
+     * @return mixed
+     */
     public function showPostWithSlugs($categorySlug, $postSlug)
     {
         $posts = $this->categoryRepository->getPostsBySlug($categorySlug);
         $post = $this->findPostWithSlug($posts, $postSlug);
 
-        $sidebarRight = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-right');
-        $sidebarLeft = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-left');
-
         return view('theme.posts.show')
             ->with('post', $post)
-            ->with('sidebarRight', $sidebarRight)
-            ->with('sidebarLeft', $sidebarLeft);
+            ->with($this->getOptions($post->type));
     }
 
     /**
@@ -135,7 +132,7 @@ class PostController extends Controller
      *
      * @param $posts
      * @param $postSlug
-     * @return null
+     * @return Post
      */
     private function findPostWithSlug($posts, $postSlug)
     {
@@ -148,5 +145,13 @@ class PostController extends Controller
         }
 
         return null;
+    }
+
+    private function getOptions($postType)
+    {
+        return array(
+            'sidebarRight'  => $this->optionRepository->findOptionBooleanValueByName($postType . '-sidebar-right'),
+            'sidebarLeft'   => $this->optionRepository->findOptionBooleanValueByName($postType . '-sidebar-left')
+        );
     }
 }

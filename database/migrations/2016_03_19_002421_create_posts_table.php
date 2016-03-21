@@ -21,11 +21,9 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('type');
             $table->integer('author_id')->unsigned();
-            $table->integer('category_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('author_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
