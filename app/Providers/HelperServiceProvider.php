@@ -28,9 +28,8 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('viewHelper', function()
-        {
-            return new \App\Helpers\ViewHelper;
-        });
+        foreach (glob(app_path().'/Helpers/*.php') as $filename){
+            require_once($filename);
+        }
     }
 }

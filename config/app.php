@@ -211,7 +211,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
-        'Helpers' => App\Facades\Helpers::class
+        'Helpers' => App\Facades\Helpers::class,
     ],
 
 ];
