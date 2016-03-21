@@ -10,7 +10,7 @@ use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
@@ -52,7 +52,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = $this->categoryRepository->all();
+
+        return view('admin.posts.create')
+            ->with('categories', $categories);
     }
 
     /**
@@ -63,7 +66,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array(
+            'title' => Input::get('title'),
+            'content' => Input::get('content'),
+            'author_id' => Auth::user()->id,
+            'type' => 'post',
+        );
+
+        $post = $this->postRepository->create($data);
+
+        // TODO: pass category array
+        $this->postRepository->syncCategories($post->id);
+
+        return redirect('/admin/posts/' . $post->id . '/edit');
     }
 
     /**
@@ -127,7 +142,9 @@ class PostController extends Controller
         );
 
         // TODO: update all Post data + categories + author.
-        $this->postRepository->update($data, $id);
+        $post = $this->postRepository->update($data, $id);
+
+        return redirect('/admin/posts/' . $id . '/edit');
     }
 
     /**

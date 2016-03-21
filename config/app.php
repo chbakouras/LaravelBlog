@@ -157,7 +157,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
@@ -210,8 +209,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
-        'Helpers' => App\Facades\Helpers::class,
     ],
 
 ];

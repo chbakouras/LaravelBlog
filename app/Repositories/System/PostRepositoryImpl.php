@@ -46,4 +46,10 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
 
         return $with->first();
     }
+
+    public function syncCategories($id, $array = array(1))
+    {
+        $post = $this->find($id);
+        $post->categories()->sync($array);
+    }
 }

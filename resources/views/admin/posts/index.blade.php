@@ -5,7 +5,13 @@
 @endsection
 
 @section('content')
-    <h1>Posts</h1>
+
+    <h2>Posts
+        <a href="/admin/posts/create" class="btn btn-success">
+            <i class="fa fa-plus"></i> New Post
+        </a>
+    </h2>
+
     <table class="table table-striped table-bordered table-condensed">
         <tr>
             <th>Id</th>

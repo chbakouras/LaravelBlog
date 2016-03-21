@@ -22,4 +22,6 @@ interface PostRepository extends Repository
     public function eagerLoadAllPaginated($with, $perPage = 20);
 
     public function eagerLoadOne($with, $id);
+
+    public function syncCategories($id, $array = array(1,2));
 }

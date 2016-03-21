@@ -6,7 +6,11 @@
 @endsection
 
 @section('content')
-    <h2>Edit {{ $post->type }}</h2>
+    <h2>Edit {{ $post->type }}
+        <a href="/admin/posts/create" class="btn btn-success">
+            <i class="fa fa-plus"></i> New Post
+        </a>
+    </h2>
     <div class="row">
         {!! Form::model($post, array('route' => array('admin.posts.update', $post->id), 'method' => 'PUT')) !!}
         <div class="col-lg-10">
