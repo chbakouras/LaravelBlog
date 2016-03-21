@@ -31,8 +31,6 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        $siteName = $this->optionRepository->findOptionStringValueByName('site-name');
-
-        return view('admin.dashboard')->with('siteName', $siteName);
+        return view('admin.dashboard.index');
     }
 }

@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.admin')
 
 @section('add-to-head')
     <title>Dashboard</title>

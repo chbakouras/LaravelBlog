@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('partials.head')
+    @include('admin.partials.head')
     @yield('add-to-head')
 </head>
 <body>
-@include('partials.admin-header')
+@include('admin.partials.header')
 <div id="wrapper" class="admin">
     <div id="sidebar-wrapper">
-        @include('partials.admin-left-sidebar')
+        @include('admin.partials.left-sidebar')
     </div>
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    @include('partials.footer')
+    @include('admin.partials.footer')
 </div>
 
 <!-- Scripts -->
