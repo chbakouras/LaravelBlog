@@ -120,6 +120,15 @@
     }
 }
 
-.menu-icons {
+#editor-wrapper {
+    margin-top: 40px;
+}
 
+#editor {
+    width: 100%;
+    height: 400px;
+}
+
+#permalink{
+    padding: 5px;
 }

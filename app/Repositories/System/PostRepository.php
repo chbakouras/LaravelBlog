@@ -19,5 +19,7 @@ interface PostRepository extends Repository
 
     public function findAllWithTypePaginated($type = 'post', $perPage = 20);
 
-    public function eagerLoadAllPaginated($array, $perPage = 20);
+    public function eagerLoadAllPaginated($with, $perPage = 20);
+
+    public function eagerLoadOne($with, $id);
 }

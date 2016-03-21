@@ -103,7 +103,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = $this->postRepository->find($id);
+        $post = $this->postRepository->eagerLoadOne('categories', $id);
         $categories = $this->categoryRepository->all();
 
         return view('admin.posts.edit')

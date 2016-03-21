@@ -6,10 +6,25 @@
 @endsection
 
 @section('content')
-    <h1>Edit {{ $post->type }}</h1>
-    <textarea title="editor" id="editor" style="width:100%; min-height:400px">
-        {{ $post->content }}
-    </textarea>
+    <h2>Edit {{ $post->type }}</h2>
+    <div class="row">
+        {!! Form::model($post, array('route' => array('admin.posts.update', $post->id), 'method' => 'PUT')) !!}
+        <div class="col-lg-10">
+            {!! Form::text('name', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
+            <span id="permalink">Permalink: <a href="{{ URL::to('/') . '/' . $post->categories->first()->slug . '/' . $post->slug }}" target="_blank">{{ URL::to('/') . '/' . $post->categories->first()->slug . '/' . $post->slug }}</a></span>
+            <div id="editor-wrapper">
+                <textarea title="editor" id="editor">
+                    {{ $post->content }}
+                </textarea>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div id="publish">
+                {!! Form::submit('Update', array('class' => 'btn btn-primary pull-right')) !!}
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
 @endsection
 
 @section('scripts')
