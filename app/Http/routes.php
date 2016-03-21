@@ -38,6 +38,8 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     // Blog - public
+    Route::get('/{categorySlug}/{postSlug}', 'System\PostController@showPostWithSlugs');
     Route::resource('/posts', 'System\PostController', ['only' => ['show']]);
+
 });
 

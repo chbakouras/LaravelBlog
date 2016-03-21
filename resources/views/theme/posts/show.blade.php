@@ -1,6 +1,7 @@
 @extends('theme.theme')
 
 @section('add-to-head')
+
     <title>{{ $post->title }}</title>
 @endsection
 

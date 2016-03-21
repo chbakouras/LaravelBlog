@@ -20,8 +20,13 @@ class Post extends Model
 
     public $timestamps = true;
 
-    public function Author()
+    public function author()
     {
         return $this->belongsTo('User', 'author_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
     }
 }

@@ -27,9 +27,9 @@
                 @yield('content')
             </div>
             @if($sidebarRight)
-                <div id="right-sidebar" class="col-md-3">
-                    @yield('sidebar-right')
-                </div>
+            <div id="right-sidebar" class="col-md-3">
+                @yield('sidebar-right')
+            </div>
             @endif
         </div>
     </div>

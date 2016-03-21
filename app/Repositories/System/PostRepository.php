@@ -15,5 +15,5 @@ use App\Repositories\Repository;
  */
 interface PostRepository extends Repository
 {
-
+    public function findBySlug($postSlug);
 }

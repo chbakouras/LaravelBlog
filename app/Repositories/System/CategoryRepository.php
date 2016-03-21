@@ -13,7 +13,9 @@ use App\Repositories\Repository;
  *
  * @package App\Repositories
  */
-interface CategoriesRepository extends Repository
+interface CategoryRepository extends Repository
 {
+    public function findBySlug($categorySlug);
 
+    public function getPostsBySlug($categorySlug);
 }

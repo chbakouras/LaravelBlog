@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Repositories\System\CategoryRepository;
 use App\Repositories\System\OptionRepository;
 use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
@@ -15,17 +16,20 @@ class PostController extends Controller
 {
     protected $postRepository;
     protected $optionRepository;
+    protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
      * @param  PostRepository $postRepository
      * @param OptionRepository $optionRepository
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(PostRepository $postRepository, OptionRepository $optionRepository)
+    public function __construct(PostRepository $postRepository, OptionRepository $optionRepository, CategoryRepository $categoryRepository)
     {
         $this->optionRepository = $optionRepository;
         $this->postRepository = $postRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -78,6 +82,20 @@ class PostController extends Controller
             ->with('sidebarLeft', $sidebarLeft);
     }
 
+    public function showPostWithSlugs($categorySlug, $postSlug)
+    {
+        $posts = $this->categoryRepository->getPostsBySlug($categorySlug);
+        $post = $this->findPostWithSlug($posts, $postSlug);
+
+        $sidebarRight = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-right');
+        $sidebarLeft = $this->optionRepository->findOptionBooleanValueByName('post-sidebar-left');
+
+        return view('theme.posts.show')
+            ->with('post', $post)
+            ->with('sidebarRight', $sidebarRight)
+            ->with('sidebarLeft', $sidebarLeft);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -110,5 +128,25 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Find the post with this slug.
+     *
+     * @param $posts
+     * @param $postSlug
+     * @return null
+     */
+    private function findPostWithSlug($posts, $postSlug)
+    {
+        foreach ($posts as $post)
+        {
+            if ($post->slug === $postSlug)
+            {
+                return $post;
+            }
+        }
+
+        return null;
     }
 }
