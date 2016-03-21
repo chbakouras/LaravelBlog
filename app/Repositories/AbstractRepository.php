@@ -42,4 +42,9 @@ abstract class AbstractRepository implements Repository
     {
         return call_user_func_array("{$this->modelClassName}::paginate", array($perPage));
     }
+
+    public function update(array $data, $id, $attribute="id")
+    {
+        return call_user_func_array("{$this->modelClassName}::where", array($attribute, $id))->update($data);
+    }
 }

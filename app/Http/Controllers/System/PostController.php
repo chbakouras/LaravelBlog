@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
 {
@@ -114,13 +115,19 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array(
+            'title' => Input::get('title'),
+            'content' => Input::get('content'),
+        );
+
+        // TODO: update all Post data + categories + author.
+        $this->postRepository->update($data, $id);
     }
 
     /**

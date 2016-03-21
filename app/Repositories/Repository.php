@@ -22,5 +22,7 @@ interface Repository
 
     public function destroy($ids);
 
+    public function update(array $data, $id, $attribute="id");
+
     public function findAllPaginated($perPage = 20);
 }

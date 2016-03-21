@@ -10,10 +10,10 @@
     <div class="row">
         {!! Form::model($post, array('route' => array('admin.posts.update', $post->id), 'method' => 'PUT')) !!}
         <div class="col-lg-10">
-            {!! Form::text('name', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
+            {!! Form::text('title', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
             <span id="permalink">Permalink: <a href="{{ URL::to('/') . '/' . $post->categories->first()->slug . '/' . $post->slug }}" target="_blank">{{ URL::to('/') . '/' . $post->categories->first()->slug . '/' . $post->slug }}</a></span>
             <div id="editor-wrapper">
-                <textarea title="editor" id="editor">
+                <textarea title="editor" id="editor" name="content">
                     {{ $post->content }}
                 </textarea>
             </div>

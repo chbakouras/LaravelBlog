@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    {{ $post->content }}
+    {!! $post->content !!}
     {{ $post->type }}
 @endsection
 
