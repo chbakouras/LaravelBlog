@@ -9,7 +9,7 @@ namespace App\Http\ViewComposers;
 use App\Repositories\System\OptionRepository;
 use Illuminate\View\View;
 
-class AdminComposer
+class AdminHeaderComposer
 {
     /**
      * The user repository implementation.

@@ -28,14 +28,15 @@ Route::group(['middleware' => ['web']], function () {
     // Frontend
     Route::group(['namespace' => 'Frontend'], function () {
         // Post - Page with slug
-        Route::get('/{postSlug}/', 'Backend\PostController@showPostWithSlugs');
+        Route::get('/{postSlug}/', 'PostController@showSlug')
+            ->where('postSlug', '^(?!.*admin).*$');
     });
 
     // Backend
     Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         Route::group(['middleware' => 'auth'], function () {
             // Dashboard
-            Route::get('/', 'AdminController@dashboard');
+            Route::get('/', 'DashboardController@index');
             // Posts
             Route::resource('/posts', 'PostController');
             // Categories

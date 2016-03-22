@@ -28,7 +28,7 @@
                 <td>
                     {{ $post->title }} <br>
                     <div>
-                        <a href="/{{ $post->categories->first()->slug }}/{{ $post->slug }}" target="_blank">View</a>
+                        <a href="/{{ $post->slug }}" target="_blank">View</a>
                         <a href="/admin/posts/{{ $post->id }}/edit">Edit</a>
                     </div>
                 </td>

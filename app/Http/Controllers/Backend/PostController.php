@@ -1,15 +1,16 @@
 <?php
+/**
+ * @author Chrisostomos Bakouras.
+ */
 
 namespace App\Http\Controllers\Backend;
 
+
 use App\Http\Controllers\Controller;
-use App\Models\Post;
 use App\Repositories\System\CategoryRepository;
 use App\Repositories\System\OptionRepository;
 use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -66,12 +67,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = array(
+        $data = [
             'title' => Input::get('title'),
             'content' => Input::get('content'),
             'author_id' => Auth::user()->id,
             'type' => 'post',
-        );
+        ];
 
         $post = $this->postRepository->create($data);
 
@@ -92,23 +93,7 @@ class PostController extends Controller
         $post = $this->postRepository->find($id);
 
         return view('theme.posts.show')
-            ->with('post', $post)
-            ->with($this->getOptions($post->type));
-    }
-
-    /**
-     * @param $categorySlug
-     * @param $postSlug
-     * @return mixed
-     */
-    public function showPostWithSlugs($categorySlug, $postSlug)
-    {
-        $posts = $this->categoryRepository->getPostsBySlug($categorySlug);
-        $post = $this->findPostWithSlug($posts, $postSlug);
-
-        return view('theme.posts.show')
-            ->with('post', $post)
-            ->with($this->getOptions($post->type));
+            ->with('post', $post);
     }
 
     /**
@@ -156,33 +141,5 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Find the post with this slug.
-     *
-     * @param $posts
-     * @param $postSlug
-     * @return Post
-     */
-    private function findPostWithSlug($posts, $postSlug)
-    {
-        foreach ($posts as $post)
-        {
-            if ($post->slug === $postSlug)
-            {
-                return $post;
-            }
-        }
-
-        return null;
-    }
-
-    private function getOptions($postType)
-    {
-        return array(
-            'sidebarRight'  => $this->optionRepository->findOptionBooleanValueByName($postType . '-sidebar-right'),
-            'sidebarLeft'   => $this->optionRepository->findOptionBooleanValueByName($postType . '-sidebar-left')
-        );
     }
 }

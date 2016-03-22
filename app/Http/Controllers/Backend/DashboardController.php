@@ -9,7 +9,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Repositories\System\OptionRepository;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     protected $optionRepository;
 
@@ -29,7 +29,7 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function index()
     {
         return view('admin.dashboard.index');
     }
