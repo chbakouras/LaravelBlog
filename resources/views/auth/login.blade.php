@@ -10,7 +10,7 @@
 <body>
 <img id="logo" src="{{ asset('img/logo.png') }}" />
 <div id="login">
-    {!! Form::open(array('url' => 'auth/login', 'name' => 'form-login' )) !!}
+    {!! Form::open(array('url' => 'admin/auth/login', 'name' => 'form-login' )) !!}
         {!! Form::token() !!}
         <span class="fontawesome-user"></span>
         {!! Form::text('email', null, array('id' => 'user', 'placeholder' => 'Username')) !!}

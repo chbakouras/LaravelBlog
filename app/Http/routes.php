@@ -25,21 +25,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['web']], function () {
-    Route::controllers([
-        'auth' => 'Auth\AuthController',
-        'password' => 'Auth\PasswordController',
-    ]);
-
-    // Admin section.
-    Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
-        Route::get('/', 'System\AdminController@dashboard');
-
-        Route::resource('/posts', 'System\PostController', ['except' => ['show']]);
+    // Frontend
+    Route::group(['namespace' => 'Frontend'], function () {
+        // Post - Page with slug
+        Route::get('/{postSlug}/', 'Backend\PostController@showPostWithSlugs');
     });
 
-    // Blog - public
-    Route::get('/{categorySlug}/{postSlug}', 'System\PostController@showPostWithSlugs');
-    Route::resource('/posts', 'System\PostController', ['only' => ['show']]);
+    // Backend
+    Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
+        Route::group(['middleware' => 'auth'], function () {
+            // Dashboard
+            Route::get('/', 'AdminController@dashboard');
+            // Posts
+            Route::resource('/posts', 'PostController');
+            // Categories
+            Route::resource('/categories', 'CategoryController');
+        });
 
+        // Authentication
+        Route::group(['namespace' => 'Auth'], function () {
+            Route::get('/auth/login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@getLogin']);
+            Route::post('/auth/login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@postLogin']);
+            Route::get('/auth/logout', ['as' => 'admin.auth.logout', 'middleware' => 'auth', 'uses' => 'AuthController@getLogout']);
+        });
+    });
 });
-

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -30,10 +30,13 @@ class AuthController extends Controller
      */
     protected $redirectTo = '/admin';
 
+    protected $loginPath = '/admin/auth/login';
+
+    protected $redirectAfterLogout = '/admin/auth/login';
+
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
      */
     public function __construct()
     {

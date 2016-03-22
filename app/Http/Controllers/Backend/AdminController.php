@@ -3,7 +3,7 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Backend;
 
 
 use App\Http\Controllers\Controller;
