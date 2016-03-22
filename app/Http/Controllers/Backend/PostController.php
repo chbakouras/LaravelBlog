@@ -80,7 +80,7 @@ class PostController extends Controller
         $this->postRepository
             ->syncCategories(
                 $post->id,
-                Input::has('categoryId') ? Input::get('categoryId') : $this->optionRepository->findOptionIntegerValueByName('default-category-id'));
+                Input::has('categoryId') ? Input::get('categoryId') : array($this->optionRepository->findOptionIntegerValueByName('default-category-id')));
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
