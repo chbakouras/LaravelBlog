@@ -13,7 +13,7 @@
     </h2>
     <div class="row">
         {!! Form::model($post, array('route' => array('admin.posts.update', $post->id), 'method' => 'PUT')) !!}
-        <div class="col-lg-10">
+        <div class="col-lg-9">
             {!! Form::text('title', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
             <span id="permalink">Permalink: <a href="{{ URL::to('/') . '/' . $post->slug }}" target="_blank">{{ URL::to('/') . '/' . $post->slug }}</a></span>
             <div id="editor-wrapper">
@@ -22,10 +22,9 @@
                 </textarea>
             </div>
         </div>
-        <div class="col-lg-2">
-            <div id="publish">
-                {!! Form::submit('Update', array('class' => 'btn btn-primary pull-right')) !!}
-            </div>
+        <div class="col-lg-3">
+            @include('admin.posts.partials.categories')
+            @include('admin.posts.partials.publish')
         </div>
         {!! Form::close() !!}
     </div>

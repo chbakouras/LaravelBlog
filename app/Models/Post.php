@@ -7,6 +7,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Support\Str;
  */
 class Post extends Model
 {
+    use SoftDeletes;
     /**
      * Boot function for using with Invoice Events
      *
@@ -25,6 +27,7 @@ class Post extends Model
     {
         parent::boot();
 
+        // TODO:: generate slug with another methodology (e.g. Create a service? || Create event and handler?)
         static::creating(function ($model)
         {
             $model->slug = $model->getUniqueSlug($model);
@@ -36,6 +39,8 @@ class Post extends Model
     protected $fillable = array('title', 'content', 'author_id', 'slug', 'excerpt', 'type');
 
     public $timestamps = true;
+
+    protected $dates = ['deleted_at'];
 
     public function author()
     {

@@ -34,5 +34,9 @@ class OptionsTableSeeder extends \Illuminate\Database\Seeder
             'name' => 'page-sidebar-left',
             'value' => 'true',
         ]);
+        DB::table('options')->insert([
+            'name' => 'default-category-id',
+            'value' => '1',
+        ]);
     }
 }

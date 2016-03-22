@@ -12,6 +12,11 @@ class CategoriesAndPostsTableSeeder extends \Illuminate\Database\Seeder
      */
     public function run()
     {
+        DB::table('categories')->insert([
+            'slug' => 'no-category',
+            'name' => 'No Category',
+            'description' => 'The default category.'
+        ]);
         factory(App\Models\Category::class, 20)->create()->each(function($u) {
             $u->posts()->save(factory(App\Models\Post::class)->create());
         });

@@ -47,4 +47,13 @@ abstract class AbstractRepository implements Repository
     {
         return call_user_func_array("{$this->modelClassName}::where", array($attribute, $id))->update($data);
     }
+
+    public function softDelete($id)
+    {
+        $traits = class_uses($this->modelClassName);
+
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', $traits)) {
+            $this->find($id)->delete();
+        }
+    }
 }

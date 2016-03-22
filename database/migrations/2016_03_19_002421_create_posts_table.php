@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('type');
             $table->integer('author_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('author_id')->references('id')->on('users');
         });

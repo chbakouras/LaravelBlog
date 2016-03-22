@@ -132,3 +132,10 @@
 #permalink{
     padding: 5px;
 }
+
+.widget ul {
+    width: 100%;
+    max-height: 250px;
+    overflow-y: scroll;
+    margin: 10px 0 10px -15px;
+}

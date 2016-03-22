@@ -18,6 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('admin.partials.header', 'App\Http\ViewComposers\AdminHeaderComposer');
+        view()->composer('admin.posts.partials.categories', 'App\Http\ViewComposers\PostCategoriesComposer');
         view()->composer('theme.posts.show', 'App\Http\ViewComposers\ShowPostComposer');
     }
 

@@ -38,7 +38,9 @@ Route::group(['middleware' => ['web']], function () {
             // Dashboard
             Route::get('/', 'DashboardController@index');
             // Posts
-            Route::resource('/posts', 'PostController');
+            Route::resource('/posts', 'PostController', ['except' => ['update']]);
+            Route::put('/posts/{id}', 'PostController@update');
+            Route::patch('/posts/{id}', 'PostController@softDelete');
             // Categories
             Route::resource('/categories', 'CategoryController');
         });

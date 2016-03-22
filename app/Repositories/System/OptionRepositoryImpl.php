@@ -37,4 +37,11 @@ class OptionRepositoryImpl extends AbstractRepository implements OptionRepositor
 
         return $where->first()->value === 'true'? true: false;
     }
+
+    public function findOptionIntegerValueByName($name)
+    {
+        $where = call_user_func_array("{$this->modelClassName}::where", array('name', $name));
+
+        return intval($where->first()->value);
+    }
 }

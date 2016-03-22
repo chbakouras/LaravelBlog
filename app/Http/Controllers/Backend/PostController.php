@@ -11,6 +11,7 @@ use App\Repositories\System\CategoryRepository;
 use App\Repositories\System\OptionRepository;
 use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -41,7 +42,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = $this->postRepository->eagerLoadAllPaginated(array('categories', 'author'));
+        $posts = $this->postRepository
+            ->eagerLoadAllPaginated(
+                array('categories', 'author'),
+                Input::has('type') ? Input::get('type') : 'post');
 
         return view('admin.posts.index')->with('posts', $posts);
     }
@@ -53,10 +57,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryRepository->all();
-
-        return view('admin.posts.create')
-            ->with('categories', $categories);
+        return view('admin.posts.create');
     }
 
     /**
@@ -76,8 +77,10 @@ class PostController extends Controller
 
         $post = $this->postRepository->create($data);
 
-        // TODO: pass category array
-        $this->postRepository->syncCategories($post->id);
+        $this->postRepository
+            ->syncCategories(
+                $post->id,
+                Input::has('categoryId') ? Input::get('categoryId') : $this->optionRepository->findOptionIntegerValueByName('default-category-id'));
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
@@ -105,11 +108,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = $this->postRepository->eagerLoadOne('categories', $id);
-        $categories = $this->categoryRepository->all();
 
         return view('admin.posts.edit')
-            ->with('post', $post)
-            ->with('categories', $categories);
+            ->with('post', $post);
     }
 
     /**
@@ -126,8 +127,12 @@ class PostController extends Controller
             'content' => Input::get('content'),
         );
 
-        // TODO: update all Post data + categories + author.
-        $post = $this->postRepository->update($data, $id);
+        $this->postRepository->update($data, $id);
+
+        $this->postRepository
+            ->syncCategories(
+                $id,
+                Input::has('categoryId') ? Input::get('categoryId') : $this->optionRepository->findOptionIntegerValueByName('default-category-id'));
 
         return redirect('/admin/posts/' . $id . '/edit');
     }
@@ -140,6 +145,21 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->postRepository->destroy($id);
+
+        return Response::HTTP_NO_CONTENT;
+    }
+
+    /**
+     * Soft Delete the resource
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function softDelete($id)
+    {
+        $this->postRepository->softDelete($id);
+
+        return redirect()->back();
     }
 }

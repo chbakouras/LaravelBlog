@@ -28,8 +28,11 @@
                 <td>
                     {{ $post->title }} <br>
                     <div>
+                        {{ Form::open(array('url' => '/admin/posts/' . $post->id, 'method' => 'PATCH', 'id' => 'soft-delete-form')) }}
                         <a href="/{{ $post->slug }}" target="_blank">View</a>
                         <a href="/admin/posts/{{ $post->id }}/edit">Edit</a>
+                        <a href="#" id="soft-delete">Thrash</a>
+                        {{ Form::close() }}
                     </div>
                 </td>
                 <td><a href="/users/{{ $post->author->id }}">{{ $post->author->name }}</a></td>
@@ -48,4 +51,5 @@
 
 @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
+    <script src="{{ asset('js/posts.js') }}"></script>
 @endsection
