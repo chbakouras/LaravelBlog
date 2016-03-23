@@ -12,7 +12,7 @@
         </a>
     </h2>
     <div class="row">
-        {!! Form::model($post, array(route('admin.posts.update', ['id' => $post->id]), 'method' => 'PUT')) !!}
+        {!! Form::model($post, array('url' => route('admin.posts.update', ['id' => $post->id]), 'method' => 'PUT')) !!}
         <div class="col-lg-9">
             {!! Form::text('title', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
             <span id="permalink">Permalink: <a href="{{ URL::to('/') . '/' . $post->slug }}" target="_blank">{{ URL::to('/') . '/' . $post->slug }}</a></span>

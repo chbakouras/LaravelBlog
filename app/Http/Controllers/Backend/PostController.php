@@ -15,6 +15,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
@@ -84,7 +85,7 @@ class PostController extends Controller
                 $post->id,
                 Input::has('categoryId') ? Input::get('categoryId') : array($this->optionRepository->findOptionIntegerValueByName('default-category-id')));
 
-        return route('admin.posts.edit', ['id' => $post->id]);
+        return Redirect::to(route('admin.posts.edit', ['id' => $post->id]));
     }
 
     /**
@@ -96,6 +97,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = $this->postRepository->find($id);
+        if (!$post) {
+            abort(404);
+        }
 
         return view('theme.posts.show')
             ->with('post', $post);
@@ -137,7 +141,7 @@ class PostController extends Controller
                 $id,
                 Input::has('categoryId') ? Input::get('categoryId') : $this->optionRepository->findOptionIntegerValueByName('default-category-id'));
 
-        return route('admin.posts.edit', ['id' => $id]);
+        return Redirect::to(route('admin.posts.edit', ['id' => $id]));
     }
 
     /**

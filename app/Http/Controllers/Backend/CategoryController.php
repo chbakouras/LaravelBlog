@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -34,7 +35,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryRepository->all();
+        $categories = $this->categoryRepository->findAllPaginated();
 
         return view('admin.categories.index')->with('categories', $categories);
     }
@@ -65,7 +66,7 @@ class CategoryController extends Controller
 
         $category = $this->categoryRepository->create($data);
 
-        return route('admin.categories.edit', ['id' => $category->id]);
+        return Redirect::to(route('admin.categories.edit', ['id' => $category->id]));
     }
 
     /**
@@ -113,7 +114,7 @@ class CategoryController extends Controller
 
         $this->categoryRepository->update($data, $id);
 
-        return route('admin.categories.edit', ['id' => $id]);
+        return Redirect::to(route('admin.categories.edit', ['id' => $id]));
     }
 
     /**

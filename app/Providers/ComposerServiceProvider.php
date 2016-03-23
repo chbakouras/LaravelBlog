@@ -25,6 +25,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('admin.posts.partials.categories', 'App\Http\ViewComposers\Backend\PostsPartialsCategoriesComposer');
         view()->composer('admin.posts.partials.publish', 'App\Http\ViewComposers\Backend\PostsPartialsPublishComposer');
 
+        view()->composer('admin.categories.partials.category-list', 'App\Http\ViewComposers\Backend\CategoriesPartialsCategoryList');
+
         // Frontend
         view()->composer('theme.posts.show', 'App\Http\ViewComposers\Frontend\PostsShowComposer');
     }

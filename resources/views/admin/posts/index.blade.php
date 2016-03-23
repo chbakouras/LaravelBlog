@@ -70,5 +70,5 @@
 
 @section('scripts')
     <script src="{{ asset('js/menu.js') }}"></script>
-    <script src="{{ asset('js/posts.js') }}"></script>
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endsection

@@ -1,16 +1,16 @@
 @extends('admin.admin')
 
 @section('add-to-head')
-    <title>Edit</title>
+    <title>New {{ ucfirst($postType) }}</title>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 @endsection
 
 @section('content')
     <h2>Create New {{ ucfirst($postType) }}</h2>
     <div class="row">
-        {!! Form::open(array('url' => '/admin/posts')) !!}
+        {!! Form::open(array('url' => route('admin.posts.store'))) !!}
         <div class="col-lg-9">
-            {!! Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
+            {!! Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Type title', 'autocomplete' => 'off')) !!}
 
             <div id="editor-wrapper">
                 <textarea title="editor" id="editor" name="content">

@@ -143,3 +143,7 @@
 .inline-form {
     display: inline;
 }
+
+.margin10 {
+    margin: 10px 0;
+}
