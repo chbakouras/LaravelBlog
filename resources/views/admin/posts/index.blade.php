@@ -6,9 +6,9 @@
 
 @section('content')
 
-    <h2>Posts
-        <a href="{{ route('admin.posts.create') }}" class="btn btn-success">
-            <i class="fa fa-plus"></i> New Post
+    <h2>{{ ucfirst($postType) }}s
+        <a href="{{ route('admin.posts.create') }}?type={{ $postType }}" class="btn btn-success">
+            <i class="fa fa-plus"></i> New {{ ucfirst($postType) }}
         </a>
     </h2>
 

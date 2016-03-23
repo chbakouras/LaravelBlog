@@ -36,7 +36,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         Route::group(['middleware' => 'auth'], function () {
             // Dashboard
-            Route::get('/', 'DashboardController@index');
+            Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'DashboardController@index']);
             // Posts
             Route::resource('/posts', 'PostController', ['except' => ['update']]);
             Route::put('/posts/{id}', ['as' => 'admin.posts.update', 'uses' => 'PostController@update']);

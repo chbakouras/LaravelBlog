@@ -3,14 +3,14 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Backend;
 
 
 use App\Repositories\System\PostRepository;
 use Illuminate\Support\Facades\Input;
 use Illuminate\View\View;
 
-class IndexPostsComposer
+class PostsIndexComposer
 {
     /**
      * The user repository implementation.
@@ -44,6 +44,9 @@ class IndexPostsComposer
         )->with(
             'activeStatus',
             Input::has('status') ? Input::get('status') : ''
+        )->with(
+            'postType',
+            Input::has('type') ? Input::get('type') : 'post'
         );
     }
 }

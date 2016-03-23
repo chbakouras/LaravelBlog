@@ -3,7 +3,7 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Backend;
 
 
 use App\Repositories\System\OptionRepository;

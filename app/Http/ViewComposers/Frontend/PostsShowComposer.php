@@ -3,13 +3,13 @@
  * @author Chrisostomos Bakouras.
  */
 
-namespace App\Http\ViewComposers;
+namespace App\Http\ViewComposers\Frontend;
 
 
 use App\Repositories\System\OptionRepository;
 use Illuminate\View\View;
 
-class ShowPostComposer
+class PostsShowComposer
 {
     /**
      * The user repository implementation.

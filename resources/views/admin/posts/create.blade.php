@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    <h2>Create New Post</h2>
+    <h2>Create New {{ ucfirst($postType) }}</h2>
     <div class="row">
         {!! Form::open(array('url' => '/admin/posts')) !!}
         <div class="col-lg-9">
@@ -21,6 +21,7 @@
             @include('admin.posts.partials.categories')
             @include('admin.posts.partials.publish')
         </div>
+        {!! Form::hidden('type', $postType) !!}
         {!! Form::close() !!}
     </div>
 @endsection

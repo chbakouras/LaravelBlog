@@ -72,9 +72,10 @@ class PostController extends Controller
         $data = [
             'title' => Input::get('title'),
             'content' => Input::get('content'),
+            'type' => Input::get('type'),
             'author_id' => Auth::user()->id,
-            'type' => 'post',
         ];
+        //TODO: Auto generate slug and excerpt with a service or an event - handler
 
         $post = $this->postRepository->create($data);
 
