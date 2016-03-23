@@ -23,45 +23,45 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
      */
     public function findBySlug($postSlug)
     {
-        $where = call_user_func_array("{$this->modelClassName}::where", array('slug', $postSlug));
+        $builder = call_user_func_array("{$this->modelClassName}::where", array('slug', $postSlug));
 
-        return $where->first();
+        return $builder->first();
     }
 
     public function findAllWithTypePaginated($type = 'post', $perPage = 20)
     {
-        $where = call_user_func_array("{$this->modelClassName}::where", array('type', $type));
+        $builder = call_user_func_array("{$this->modelClassName}::where", array('type', $type));
 
-        return $where->paginate($perPage);
+        return $builder->paginate($perPage);
     }
 
     public function eagerLoadAllPaginated($with, $query, $perPage = 20)
     {
 
-        $where = call_user_func_array("{$this->modelClassName}::where",
+        $builder = call_user_func_array("{$this->modelClassName}::where",
             array('type', array_key_exists('type', $query) ? $query['type'] : 'post')
         );
 
         if (array_key_exists('status', $query)) {
-            $where->where(
+            $builder->where(
                 'status',
                 $query['status']
             );
             if ($query['status'] === Config::get('blog.post.status.trashed'))
-                $where->onlyTrashed();
+                $builder->onlyTrashed();
         }
 
-        $where->with($with);
+        $builder->with($with);
 
-        return $where->paginate($perPage);
+        return $builder->paginate($perPage);
     }
 
     public function eagerLoadOne($with, $id)
     {
-        $where = call_user_func_array("{$this->modelClassName}::where", array('id', $id));
-        $with = $where->with($with);
+        $builder = call_user_func_array("{$this->modelClassName}::where", array('id', $id));
+        $builder->with($with);
 
-        return $with->first();
+        return $builder->first();
     }
 
     public function syncCategories($id, $array = array(1))
@@ -70,17 +70,18 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         $post->categories()->sync($array);
     }
 
-    public function syncCategoriesToModel(Model $model, $array = array(1))
+    public function syncCategoriesToModel(Model $post, $array = array(1))
     {
-        $model->categories()->sync($array);
+        $post->categories()->sync($array);
     }
 
-    public function findDistinctStatus()
+    public function findDistinctStatus($type)
     {
-        $query = call_user_func_array("{$this->modelClassName}::select", array('status'));
-        $query->withTrashed();
+        $builder = call_user_func_array("{$this->modelClassName}::select", array('status'));
+        $builder->where('type', $type);
+        $builder->withTrashed();
 
-        return $query->groupBy('status')->lists('status');
+        return $builder->groupBy('status')->lists('status');
     }
 
     public function softDelete($id)

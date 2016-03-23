@@ -26,7 +26,7 @@ interface PostRepository extends Repository
 
     public function syncCategories($id, $array = array(1));
 
-    public function syncCategoriesToModel(Model $model, $array = array(1));
+    public function syncCategoriesToModel(Model $post, $array = array(1));
 
-    public function findDistinctStatus();
+    public function findDistinctStatus($type);
 }

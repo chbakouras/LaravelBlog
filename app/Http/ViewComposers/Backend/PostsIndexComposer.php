@@ -37,16 +37,11 @@ class PostsIndexComposer
      */
     public function compose(View $view)
     {
-        $view->with(
-            'statuses',
-            $this->postRepository
-                ->findDistinctStatus()
-        )->with(
-            'activeStatus',
-            Input::has('status') ? Input::get('status') : ''
-        )->with(
-            'postType',
-            Input::has('type') ? Input::get('type') : 'post'
-        );
+        $postType = Input::has('type') ? Input::get('type') : 'post';
+        $activeStatus = Input::has('status') ? Input::get('status') : '';
+
+        $view->with('statuses', $this->postRepository->findDistinctStatus($postType))
+            ->with('activeStatus', $activeStatus)
+            ->with('postType', $postType);
     }
 }

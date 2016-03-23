@@ -42,7 +42,7 @@
                             {{ Form::close() }}
                         @else
                             {{ Form::open(array('url' => route('admin.posts.patch', ['id' => $post->id]), 'method' => 'PATCH', 'id' => 'delete-form-' . $post->id, 'class' => 'inline-form')) }}
-                            <a href="#" onclick="submitForm({{ $post->id }})">Thrash</a>
+                            <a href="#" onclick="submitForm({{ $post->id }})">Trash</a>
                             {{ Form::close() }}
                         @endif
                     </div>

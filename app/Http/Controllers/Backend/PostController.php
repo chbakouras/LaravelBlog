@@ -76,7 +76,7 @@ class PostController extends Controller
             'author_id' => Auth::user()->id,
         ];
         //TODO: Auto generate slug and excerpt with a service or an event - handler
-
+        //TODO: Auto upload images from article links - Create an Upload controller? or a service?
         $post = $this->postRepository->create($data);
 
         $this->postRepository
