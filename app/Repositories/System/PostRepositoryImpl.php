@@ -8,6 +8,7 @@ namespace App\Repositories\System;
 
 use App\Repositories\AbstractRepository;
 use App\Repositories\Criteria\AndWhereCriteria;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 
 class PostRepositoryImpl extends AbstractRepository implements PostRepository
@@ -50,8 +51,6 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
                 $where->onlyTrashed();
         }
 
-//        dd($where->toSql());
-
         $where->with($with);
 
         return $where->paginate($perPage);
@@ -71,6 +70,11 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         $post->categories()->sync($array);
     }
 
+    public function syncCategoriesToModel(Model $model, $array = array(1))
+    {
+        $model->categories()->sync($array);
+    }
+
     public function findDistinctStatus()
     {
         $query = call_user_func_array("{$this->modelClassName}::select", array('status'));
@@ -88,5 +92,13 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
             $post->save();
             $post->delete();
         }
+    }
+
+    public function forceDelete($id)
+    {
+        $post = $this->findWithTrashed($id);
+        $this->syncCategoriesToModel($post, array());
+
+        $post->forceDelete();
     }
 }

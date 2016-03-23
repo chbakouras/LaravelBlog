@@ -33,6 +33,14 @@ abstract class AbstractRepository implements Repository
         return call_user_func_array("{$this->modelClassName}::find", array($id, $columns));
     }
 
+    public function findWithTrashed($id, $columns = array('*'))
+    {
+        $where = call_user_func_array("{$this->modelClassName}::where", array('id', $id));
+        $withTrashed = $where->withTrashed();
+
+        return $withTrashed->first();
+    }
+
     public function destroy($ids)
     {
         return call_user_func_array("{$this->modelClassName}::destroy", array($ids));
@@ -55,5 +63,10 @@ abstract class AbstractRepository implements Repository
         if (in_array('Illuminate\Database\Eloquent\SoftDeletes', $traits)) {
             $this->find($id)->delete();
         }
+    }
+
+    public function forceDelete($id)
+    {
+        $this->findWithTrashed($id)->forceDelete();
     }
 }

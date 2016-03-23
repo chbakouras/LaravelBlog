@@ -20,9 +20,15 @@ interface Repository
 
     public function find($id, $columns = array('*'));
 
+    public function findWithTrashed($id, $columns = array('*'));
+
     public function destroy($ids);
 
     public function update(array $data, $id, $attribute="id");
 
     public function findAllPaginated($perPage = 20);
+
+    public function softDelete($id);
+
+    public function forceDelete($id);
 }

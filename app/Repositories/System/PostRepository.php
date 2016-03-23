@@ -5,6 +5,7 @@
 
 namespace App\Repositories\System;
 use App\Repositories\Repository;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface PostRepository
@@ -23,7 +24,9 @@ interface PostRepository extends Repository
 
     public function eagerLoadOne($with, $id);
 
-    public function syncCategories($id, $array = array(1,2));
+    public function syncCategories($id, $array = array(1));
+
+    public function syncCategoriesToModel(Model $model, $array = array(1));
 
     public function findDistinctStatus();
 }

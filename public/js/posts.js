@@ -1,3 +1,3 @@
-function softDelete($id) {
-    document.getElementById("soft-delete-form-"+$id).submit();
+function submitForm($id) {
+    document.getElementById("delete-form-"+$id).submit();
 }

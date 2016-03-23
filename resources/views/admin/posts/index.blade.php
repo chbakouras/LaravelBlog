@@ -34,11 +34,17 @@
                 <td>
                     {{ $post->title }} <br>
                     <div>
-                        {{ Form::open(array('url' => route('admin.posts.patch', ['id' => $post->id]), 'method' => 'PATCH', 'id' => 'soft-delete-form-' . $post->id)) }}
                         <a href="/{{ $post->slug }}" target="_blank">View</a>
                         <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}">Edit</a>
-                        <a href="#" onclick="softDelete({{ $post->id }})">Thrash</a>
-                        {{ Form::close() }}
+                        @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
+                            {{ Form::open(array('url' => route('admin.posts.destroy', ['id' => $post->id]), 'method' => 'DELETE', 'id' => 'delete-form-' . $post->id, 'class' => 'inline-form')) }}
+                            <a href="#" onclick="submitForm({{ $post->id }})">Delete Permanently</a>
+                            {{ Form::close() }}
+                        @else
+                            {{ Form::open(array('url' => route('admin.posts.patch', ['id' => $post->id]), 'method' => 'PATCH', 'id' => 'delete-form-' . $post->id, 'class' => 'inline-form')) }}
+                            <a href="#" onclick="submitForm({{ $post->id }})">Thrash</a>
+                            {{ Form::close() }}
+                        @endif
                     </div>
                 </td>
                 <td><a href="{{ route('admin.users.show', [$post->author->id]) }}">{{ $post->author->name }}</a></td>
@@ -57,6 +63,9 @@
             </tr>
         @endforeach
     </table>
+    <div class="paginate">
+        {!! $posts->render() !!}
+    </div>
 @endsection
 
 @section('scripts')

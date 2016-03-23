@@ -148,9 +148,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $this->postRepository->destroy($id);
+        $this->postRepository->forceDelete($id);
 
-        return Response::HTTP_NO_CONTENT;
+        return redirect()->back();
     }
 
     /**
