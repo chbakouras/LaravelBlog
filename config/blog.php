@@ -16,7 +16,7 @@ return [
         'status' => [
             'published' => 'published',
             'scheduled' => 'scheduled',
-            'thrashed' => 'thrashed',
+            'trashed' => 'trashed',
             'draft' => 'draft',
         ],
     ],

@@ -22,8 +22,8 @@
             <th>Categories</th>
             <th>Type</th>
             <th>Status</th>
-            @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
-                <th>Thrashed date</th>
+            @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.trashed'))
+                <th>Trashed date</th>
             @endif
             <th>Creation date</th>
             <th>Update date</th>
@@ -36,7 +36,7 @@
                     <div>
                         <a href="/{{ $post->slug }}" target="_blank">View</a>
                         <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}">Edit</a>
-                        @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
+                        @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.trashed'))
                             {{ Form::open(array('url' => route('admin.posts.destroy', ['id' => $post->id]), 'method' => 'DELETE', 'id' => 'delete-form-' . $post->id, 'class' => 'inline-form')) }}
                             <a href="#" onclick="submitForm({{ $post->id }})">Delete Permanently</a>
                             {{ Form::close() }}
@@ -55,7 +55,7 @@
                 </td>
                 <td>{{ $post->type }}</td>
                 <td>{{ $post->status }}</td>
-                @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
+                @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.trashed'))
                     <td>{{ $post->deleted_at }}</td>
                 @endif
                 <td>{{ $post->created_at }}</td>

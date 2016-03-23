@@ -47,7 +47,7 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
                 'status',
                 $query['status']
             );
-            if ($query['status'] === Config::get('blog.post.status.thrashed'))
+            if ($query['status'] === Config::get('blog.post.status.trashed'))
                 $where->onlyTrashed();
         }
 
@@ -78,6 +78,7 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
     public function findDistinctStatus()
     {
         $query = call_user_func_array("{$this->modelClassName}::select", array('status'));
+        $query->withTrashed();
 
         return $query->groupBy('status')->lists('status');
     }
@@ -88,7 +89,7 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
 
         if (in_array('Illuminate\Database\Eloquent\SoftDeletes', $traits)) {
             $post = $this->find($id);
-            $post->status = Config::get('blog.post.status.thrashed');
+            $post->status = Config::get('blog.post.status.trashed');
             $post->save();
             $post->delete();
         }
