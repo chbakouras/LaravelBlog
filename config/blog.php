@@ -11,4 +11,15 @@
 return [
     'name' => 'Blog admin',
     'url' => '',
+
+    'post' => [
+        'status' => [
+            'published' => 'published',
+            'scheduled' => 'scheduled',
+            'thrashed' => 'thrashed',
+            'draft' => 'draft',
+        ],
+    ],
+
+    'show-all' => 'All',
 ];

@@ -1,3 +1,3 @@
-document.getElementById("soft-delete").onclick = function() {
-    document.getElementById("soft-delete-form").submit();
-};
+function softDelete($id) {
+    document.getElementById("soft-delete-form-"+$id).submit();
+}

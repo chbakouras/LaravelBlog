@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('excerpt');
             $table->string('slug');
             $table->string('type');
+            $table->string('status');
             $table->integer('author_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

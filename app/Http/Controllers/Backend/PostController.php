@@ -13,6 +13,7 @@ use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class PostController extends Controller
@@ -45,7 +46,7 @@ class PostController extends Controller
         $posts = $this->postRepository
             ->eagerLoadAllPaginated(
                 array('categories', 'author'),
-                Input::has('type') ? Input::get('type') : 'post');
+                Input::all());
 
         return view('admin.posts.index')->with('posts', $posts);
     }

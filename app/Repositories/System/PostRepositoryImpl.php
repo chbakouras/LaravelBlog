@@ -7,6 +7,8 @@ namespace App\Repositories\System;
 
 
 use App\Repositories\AbstractRepository;
+use App\Repositories\Criteria\AndWhereCriteria;
+use Illuminate\Support\Facades\Config;
 
 class PostRepositoryImpl extends AbstractRepository implements PostRepository
 {
@@ -32,9 +34,24 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         return $where->paginate($perPage);
     }
 
-    public function eagerLoadAllPaginated($with, $type, $perPage = 20)
+    public function eagerLoadAllPaginated($with, $query, $perPage = 20)
     {
-        $where = call_user_func_array("{$this->modelClassName}::where", array('type', $type));
+
+        $where = call_user_func_array("{$this->modelClassName}::where",
+            array('type', array_key_exists('type', $query) ? $query['type'] : 'post')
+        );
+
+        if (array_key_exists('status', $query)) {
+            $where->where(
+                'status',
+                $query['status']
+            );
+            if ($query['status'] === Config::get('blog.post.status.thrashed'))
+                $where->onlyTrashed();
+        }
+
+//        dd($where->toSql());
+
         $where->with($with);
 
         return $where->paginate($perPage);
@@ -52,5 +69,24 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
     {
         $post = $this->find($id);
         $post->categories()->sync($array);
+    }
+
+    public function findDistinctStatus()
+    {
+        $query = call_user_func_array("{$this->modelClassName}::select", array('status'));
+
+        return $query->groupBy('status')->lists('status');
+    }
+
+    public function softDelete($id)
+    {
+        $traits = class_uses($this->modelClassName);
+
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', $traits)) {
+            $post = $this->find($id);
+            $post->status = Config::get('blog.post.status.thrashed');
+            $post->save();
+            $post->delete();
+        }
     }
 }

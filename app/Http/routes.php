@@ -39,10 +39,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/', 'DashboardController@index');
             // Posts
             Route::resource('/posts', 'PostController', ['except' => ['update']]);
-            Route::put('/posts/{id}', 'PostController@update');
-            Route::patch('/posts/{id}', 'PostController@softDelete');
+            Route::put('/posts/{id}', ['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
+            Route::patch('/posts/{id}', ['as' => 'admin.posts.patch', 'uses' => 'PostController@softDelete']);
             // Categories
             Route::resource('/categories', 'CategoryController');
+            // Users
+            Route::resource('/users', 'UserController');
         });
 
         // Authentication

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Config;
+
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -35,6 +37,7 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'excerpt' => $faker->text($maxNbChars = 100),
         'slug' => $faker->word,
         'type' => $faker->randomElement(array('post','page')),
+        'status' => $faker->randomElement(Config::get('blog.post.status')),
         'author_id' => 1,
     ];
 });
