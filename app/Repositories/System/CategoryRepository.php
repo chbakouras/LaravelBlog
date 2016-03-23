@@ -18,4 +18,6 @@ interface CategoryRepository extends Repository
     public function findBySlug($categorySlug);
 
     public function getPostsBySlug($categorySlug);
+
+    public function syncPosts($id);
 }

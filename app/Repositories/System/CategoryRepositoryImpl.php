@@ -31,4 +31,10 @@ class CategoryRepositoryImpl extends AbstractRepository implements CategoryRepos
 
         return $category->posts;
     }
+
+    public function syncPosts($id)
+    {
+        $category = $this->find($id);
+        $category->posts()->sync(array());
+    }
 }

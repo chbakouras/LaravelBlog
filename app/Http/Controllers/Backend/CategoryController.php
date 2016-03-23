@@ -125,6 +125,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->categoryRepository
+            ->syncPosts($id);
+
         $this->categoryRepository->destroy($id);
 
         return redirect()->back();
