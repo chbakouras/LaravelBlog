@@ -3,12 +3,30 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\System\CategoryRepository;
+use App\Repositories\System\OptionRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+    protected $optionRepository;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param CategoryRepository $categoryRepository
+     * @param OptionRepository $optionRepository
+     */
+    public function __construct(CategoryRepository $categoryRepository, OptionRepository $optionRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+        $this->optionRepository = $optionRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +34,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = $this->categoryRepository->all();
+
+        return view('admin.categories.index')->with('categories', $categories);
     }
 
     /**
@@ -26,7 +46,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,7 +57,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'slug' => Input::get('slug'),
+            'name' => Input::get('name'),
+            'description' => Input::get('description'),
+        ];
+
+        $category = $this->categoryRepository->create($data);
+
+        return route('admin.categories.edit', ['id' => $category->id]);
     }
 
     /**
@@ -48,7 +76,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = $this->categoryRepository->find($id);
+
+        return view('theme.categories.show')
+            ->with('category', $category);
     }
 
     /**
@@ -59,7 +90,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->categoryRepository->find($id);
+
+        return view('admin.categories.edit')
+            ->with('category', $category);
     }
 
     /**
@@ -71,7 +105,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array(
+            'slug' => Input::get('slug'),
+            'name' => Input::get('name'),
+            'description' => Input::get('description'),
+        );
+
+        $this->categoryRepository->update($data, $id);
+
+        return route('admin.categories.edit', ['id' => $id]);
     }
 
     /**
@@ -82,6 +124,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->categoryRepository->destroy($id);
+
+        return redirect()->back();
     }
 }

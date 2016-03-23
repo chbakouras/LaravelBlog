@@ -84,7 +84,7 @@ class PostController extends Controller
                 $post->id,
                 Input::has('categoryId') ? Input::get('categoryId') : array($this->optionRepository->findOptionIntegerValueByName('default-category-id')));
 
-        return redirect('/admin/posts/' . $post->id . '/edit');
+        return route('admin.posts.edit', ['id' => $post->id]);
     }
 
     /**
@@ -137,7 +137,7 @@ class PostController extends Controller
                 $id,
                 Input::has('categoryId') ? Input::get('categoryId') : $this->optionRepository->findOptionIntegerValueByName('default-category-id'));
 
-        return redirect('/admin/posts/' . $id . '/edit');
+        return route('admin.posts.edit', ['id' => $id]);
     }
 
     /**
