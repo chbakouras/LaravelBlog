@@ -22,6 +22,9 @@
             <th>Categories</th>
             <th>Type</th>
             <th>Status</th>
+            @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
+                <th>Thrashed date</th>
+            @endif
             <th>Creation date</th>
             <th>Update date</th>
         </tr>
@@ -46,6 +49,9 @@
                 </td>
                 <td>{{ $post->type }}</td>
                 <td>{{ $post->status }}</td>
+                @if($activeStatus === \Illuminate\Support\Facades\Config::get('blog.post.status.thrashed'))
+                    <td>{{ $post->deleted_at }}</td>
+                @endif
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
             </tr>

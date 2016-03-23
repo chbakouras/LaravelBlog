@@ -7,12 +7,12 @@
 
 @section('content')
     <h2>Edit {{ $post->type }}
-        <a href="/admin/posts/create" class="btn btn-success">
-            <i class="fa fa-plus"></i> New Post
+        <a href="{{ route('admin.posts.create') }}?type={{ $post->type }}" class="btn btn-success">
+            <i class="fa fa-plus"></i> New {{ ucfirst($post->type) }}
         </a>
     </h2>
     <div class="row">
-        {!! Form::model($post, array('url' => '/admin/posts/' . $post->id, 'method' => 'PUT')) !!}
+        {!! Form::model($post, array(route('admin.posts.update', ['id' => $post->id]), 'method' => 'PUT')) !!}
         <div class="col-lg-9">
             {!! Form::text('title', $post->title, array('class' => 'form-control', 'placeholder' => 'Enter title', 'autocomplete' => 'off')) !!}
             <span id="permalink">Permalink: <a href="{{ URL::to('/') . '/' . $post->slug }}" target="_blank">{{ URL::to('/') . '/' . $post->slug }}</a></span>
@@ -26,6 +26,7 @@
             @include('admin.posts.partials.categories')
             @include('admin.posts.partials.publish')
         </div>
+        {!! Form::hidden('type', $post->type) !!}
         {!! Form::close() !!}
     </div>
 @endsection

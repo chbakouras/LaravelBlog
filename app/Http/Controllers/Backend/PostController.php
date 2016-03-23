@@ -127,6 +127,7 @@ class PostController extends Controller
         $data = array(
             'title' => Input::get('title'),
             'content' => Input::get('content'),
+            'type' => Input::get('type'),
         );
 
         $this->postRepository->update($data, $id);

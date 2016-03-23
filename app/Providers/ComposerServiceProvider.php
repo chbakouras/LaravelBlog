@@ -19,9 +19,11 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Backend
         view()->composer('admin.partials.header', 'App\Http\ViewComposers\Backend\AdminHeaderComposer');
-        view()->composer('admin.posts.partials.categories', 'App\Http\ViewComposers\Backend\PostCategoriesComposer');
+
         view()->composer('admin.posts.index', 'App\Http\ViewComposers\Backend\PostsIndexComposer');
         view()->composer('admin.posts.create', 'App\Http\ViewComposers\Backend\PostsCreateComposer');
+        view()->composer('admin.posts.partials.categories', 'App\Http\ViewComposers\Backend\PostsPartialsCategoriesComposer');
+        view()->composer('admin.posts.partials.publish', 'App\Http\ViewComposers\Backend\PostsPartialsPublishComposer');
 
         // Frontend
         view()->composer('theme.posts.show', 'App\Http\ViewComposers\Frontend\PostsShowComposer');

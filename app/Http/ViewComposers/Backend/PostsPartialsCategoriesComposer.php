@@ -9,7 +9,7 @@ namespace App\Http\ViewComposers\Backend;
 use App\Repositories\System\CategoryRepository;
 use Illuminate\View\View;
 
-class PostCategoriesComposer
+class PostsPartialsCategoriesComposer
 {
     protected $categoryRepository;
 
