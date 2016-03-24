@@ -125,10 +125,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryRepository
-            ->syncPosts($id);
+        if ($this->optionRepository->findOptionIntegerValueByName('default-category-id') != $id){
+            $this->categoryRepository
+                ->syncPosts($id);
 
-        $this->categoryRepository->destroy($id);
+            $this->categoryRepository->destroy($id);
+        }
 
         return redirect()->back();
     }

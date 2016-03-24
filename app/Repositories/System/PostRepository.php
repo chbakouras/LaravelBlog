@@ -24,9 +24,9 @@ interface PostRepository extends Repository
 
     public function eagerLoadOne($with, $id);
 
-    public function syncCategories($id, $array = array(1));
+    public function syncCategories($id, $array);
 
-    public function syncCategoriesToModel(Model $post, $array = array(1));
+    public function syncCategoriesToModel(Model $post, $array);
 
     public function findDistinctStatus($type);
 }

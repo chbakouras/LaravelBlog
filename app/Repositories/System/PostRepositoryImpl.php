@@ -15,6 +15,18 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
 {
     protected $modelClassName = '\App\Models\Post';
 
+    protected $optionRepository;
+
+    /**
+     * Create a new repository instance.
+     *
+     * @param OptionRepository $optionRepository
+     */
+    public function __construct(OptionRepository $optionRepository)
+    {
+        $this->optionRepository = $optionRepository;
+    }
+
     /**
      * Find post by slug.
      *
@@ -37,7 +49,6 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
 
     public function eagerLoadAllPaginated($with, $query, $perPage = 20)
     {
-
         $builder = call_user_func_array("{$this->modelClassName}::where",
             array('type', array_key_exists('type', $query) ? $query['type'] : 'post')
         );
@@ -47,8 +58,9 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
                 'status',
                 $query['status']
             );
-            if ($query['status'] === Config::get('blog.post.status.trashed'))
+            if ($query['status'] === Config::get('blog.post.status.trashed')) {
                 $builder->onlyTrashed();
+            }
         }
 
         $builder->with($with);
@@ -64,14 +76,22 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         return $builder->first();
     }
 
-    public function syncCategories($id, $array = array(1))
+    public function syncCategories($id, $array)
     {
+        if (empty($array)) {
+            $array = array($this->optionRepository->findOptionIntegerValueByName('default-category-id'));
+        }
+
         $post = $this->find($id);
         $post->categories()->sync($array);
     }
 
-    public function syncCategoriesToModel(Model $post, $array = array(1))
+    public function syncCategoriesToModel(Model $post, $array)
     {
+        if (empty($array)) {
+            $array = array($this->optionRepository->findOptionIntegerValueByName('default-category-id'));
+        }
+
         $post->categories()->sync($array);
     }
 
