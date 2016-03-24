@@ -147,3 +147,7 @@
 .margin10 {
     margin: 10px 0;
 }
+
+.rl-margin10 {
+    margin: 0 10px;
+}

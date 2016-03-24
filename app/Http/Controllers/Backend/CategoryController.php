@@ -132,6 +132,6 @@ class CategoryController extends Controller
             $this->categoryRepository->destroy($id);
         }
 
-        return redirect()->back();
+        return Redirect::to(route('admin.categories.index'));
     }
 }
