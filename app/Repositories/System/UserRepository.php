@@ -16,4 +16,6 @@ use App\Repositories\Repository;
 interface UserRepository extends Repository
 {
     public function findUserByUsername($username);
+
+    public function syncPosts($id);
 }

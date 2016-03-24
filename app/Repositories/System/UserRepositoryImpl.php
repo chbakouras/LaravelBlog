@@ -18,4 +18,10 @@ class UserRepositoryImpl extends AbstractRepository implements UserRepository
 
         return $where->get();
     }
+
+    public function syncPosts($id)
+    {
+        $user = $this->find($id);
+        $user->posts()->sync(array());
+    }
 }
