@@ -65,6 +65,7 @@ class UserController extends Controller
             'status' => Input::get('status'),
             'role_id' => Input::get('role'),
         ];
+        //TODO: create validator
 
         $this->userRepository->create($data);
 
@@ -93,7 +94,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->userRepository->eagerLoadOne('roles', $id);
+        $user = $this->userRepository->eagerLoadOne('role', $id);
 
         return view('admin.users.edit')
             ->with('user', $user);
@@ -113,8 +114,10 @@ class UserController extends Controller
             'email' => Input::get('email'),
             'password' => bcrypt(Input::get('password')),
             'status' => Input::get('status'),
+            'role_id' => Input::get('role'),
         );
 
+        //TODO: create validator
         $this->userRepository->update($data, $id);
 
         return Redirect::to(route('admin.users.edit', ['id' => $id]));

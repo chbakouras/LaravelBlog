@@ -75,7 +75,6 @@ abstract class AbstractRepository implements Repository
         $builder = call_user_func_array("{$this->modelClassName}::where", array('id', $id));
         $builder = $builder->with($with);
 
-        dd($builder->first());
         return $builder->first();
     }
 }
