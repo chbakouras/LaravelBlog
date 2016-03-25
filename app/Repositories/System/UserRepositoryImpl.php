@@ -19,6 +19,13 @@ class UserRepositoryImpl extends AbstractRepository implements UserRepository
         return $where->get();
     }
 
+    public function eagerLoadAllPaginated($with, $perPage = 20)
+    {
+        $builder = call_user_func_array("{$this->modelClassName}::with", array($with));
+
+        return $builder->paginate($perPage);
+    }
+
     public function syncPosts($id)
     {
         $user = $this->find($id);
@@ -29,5 +36,12 @@ class UserRepositoryImpl extends AbstractRepository implements UserRepository
     {
         $user = $this->find($id);
         $user->role()->sync(array($roleId));
+    }
+
+    public function countUserPosts($id)
+    {
+        return $this->find($id)
+            ->posts
+            ->count();
     }
 }

@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepository->findAllPaginated();
+        $users = $this->userRepository->eagerLoadAllPaginated('role');
 
         return view('admin.users.index')->with('users', $users);
     }

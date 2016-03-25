@@ -26,8 +26,8 @@
                     {{ $user->name }}
                 </td>
                 <td class="vertical-align-middle">{{ $user->email }}</td>
-                <td class="vertical-align-middle">TODO: role</td>
-                <td class="vertical-align-middle">TODO: post number</td>
+                <td class="vertical-align-middle">{{ ucfirst($user->role->name) }}</td>
+                <td class="vertical-align-middle">{{ $posts[$user->id] }}</td>
             </tr>
         @endforeach
     </table>
