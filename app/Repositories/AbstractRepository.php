@@ -69,4 +69,13 @@ abstract class AbstractRepository implements Repository
     {
         $this->findWithTrashed($id)->forceDelete();
     }
+
+    public function eagerLoadOne($with, $id)
+    {
+        $builder = call_user_func_array("{$this->modelClassName}::where", array('id', $id));
+        $builder = $builder->with($with);
+
+        dd($builder->first());
+        return $builder->first();
+    }
 }

@@ -27,6 +27,8 @@ class ComposerServiceProvider extends ServiceProvider
 
         view()->composer('admin.categories.partials.category-list', 'App\Http\ViewComposers\Backend\CategoriesPartialsCategoryList');
 
+        view()->composer('admin.users.create', 'App\Http\ViewComposers\Backend\UsersCreateComposer');
+
         // Frontend
         view()->composer('theme.posts.show', 'App\Http\ViewComposers\Frontend\PostsShowComposer');
     }

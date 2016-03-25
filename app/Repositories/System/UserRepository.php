@@ -18,4 +18,6 @@ interface UserRepository extends Repository
     public function findUserByUsername($username);
 
     public function syncPosts($id);
+
+    public function syncRole($id, $roleId);
 }

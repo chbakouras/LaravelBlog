@@ -22,4 +22,22 @@ return [
     ],
 
     'show-all' => 'All',
+
+    'auth' => [
+        'status' => [
+            'active' => 'Active',
+            'notActive' => 'Not Active'
+        ]
+    ],
+
+    'defaults' => [
+        'auth' => [
+            'status' => 'Not Active'
+        ],
+        'role' => [
+            'admin' => 'admin',
+            'editor' => 'editor',
+            'subscriber' => 'subscriber',
+        ]
+    ],
 ];

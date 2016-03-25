@@ -24,4 +24,10 @@ class UserRepositoryImpl extends AbstractRepository implements UserRepository
         $user = $this->find($id);
         $user->posts()->sync(array());
     }
+
+    public function syncRole($id, $roleId)
+    {
+        $user = $this->find($id);
+        $user->role()->sync(array($roleId));
+    }
 }

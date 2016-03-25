@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'status', 'role_id',
     ];
 
     /**
@@ -23,6 +23,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
 
     /**
      * Get the unique identifier for the user.

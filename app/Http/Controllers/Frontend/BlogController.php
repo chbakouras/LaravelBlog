@@ -11,7 +11,7 @@ use App\Repositories\System\CategoryRepository;
 use App\Repositories\System\OptionRepository;
 use App\Repositories\System\PostRepository;
 
-class PostController extends Controller
+class BlogController extends Controller
 {
     protected $postRepository;
     protected $categoryRepository;

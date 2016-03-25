@@ -1,7 +1,7 @@
 @extends('admin.admin')
 
 @section('add-to-head')
-    <title>Edit</title>
+    <title>New Category</title>
 @endsection
 
 @section('content')

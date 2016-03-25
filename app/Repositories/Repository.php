@@ -22,6 +22,8 @@ interface Repository
 
     public function findWithTrashed($id, $columns = array('*'));
 
+    public function eagerLoadOne($with, $id);
+
     public function destroy($ids);
 
     public function update(array $data, $id, $attribute="id");

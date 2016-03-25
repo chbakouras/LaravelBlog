@@ -60,12 +60,14 @@ class UserController extends Controller
         $data = [
             'name' => Input::get('name'),
             'email' => Input::get('email'),
-            'password' => Input::get('password'),
+            'password' => bcrypt(Input::get('password')),
+            'status' => Input::get('status'),
+            'role_id' => Input::get('role'),
         ];
 
-        $user = $this->userRepository->create($data);
+        $this->userRepository->create($data);
 
-        return Redirect::to(route('admin.users.edit', ['id' => $user->id]));
+        return Redirect::to(route('admin.users.index'));
     }
 
     /**
@@ -90,7 +92,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->eagerLoadOne('roles', $id);
 
         return view('admin.users.edit')
             ->with('user', $user);
@@ -108,7 +110,8 @@ class UserController extends Controller
         $data = array(
             'name' => Input::get('name'),
             'email' => Input::get('email'),
-            'password' => Input::get('password'),
+            'password' => bcrypt(Input::get('password')),
+            'status' => Input::get('status'),
         );
 
         $this->userRepository->update($data, $id);

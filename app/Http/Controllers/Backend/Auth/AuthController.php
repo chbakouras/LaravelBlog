@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -69,6 +70,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'status' => Config::get('blog.defaults.auth.status'),
         ]);
     }
 }

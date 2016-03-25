@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
     // Frontend
     Route::group(['namespace' => 'Frontend'], function () {
         // Post - Page with slug
-        Route::get('/{postSlug}/', 'PostController@showSlug')
+        Route::get('/{postSlug}/', 'BlogController@showSlug')
             ->where('postSlug', '^(?!.*admin).*$');
     });
 
@@ -36,22 +36,27 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         Route::group(['middleware' => 'auth'], function () {
             // Dashboard
-            Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'DashboardController@index']);
+            $this->get('/', ['as' => 'admin.dashboard.index', 'uses' => 'DashboardController@index']);
             // Posts
-            Route::resource('/posts', 'PostController', ['except' => ['update']]);
-            Route::put('/posts/{id}', ['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
-            Route::patch('/posts/{id}', ['as' => 'admin.posts.patch', 'uses' => 'PostController@softDelete']);
+            $this->resource('/posts', 'PostController', ['except' => ['update']]);
+            $this->put('/posts/{id}', ['as' => 'admin.posts.update', 'uses' => 'PostController@update']);
+            $this->patch('/posts/{id}', ['as' => 'admin.posts.patch', 'uses' => 'PostController@softDelete']);
             // Categories
-            Route::resource('/categories', 'CategoryController');
+            $this->resource('/categories', 'CategoryController');
             // Users
-            Route::resource('/users', 'UserController');
+            $this->resource('/users', 'UserController');
         });
 
         // Authentication
-        Route::group(['namespace' => 'Auth'], function () {
-            Route::get('/auth/login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@getLogin']);
-            Route::post('/auth/login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@postLogin']);
-            Route::get('/auth/logout', ['as' => 'admin.auth.logout', 'middleware' => 'auth', 'uses' => 'AuthController@getLogout']);
+        Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+            // Authentication Routes
+            $this->get('login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@getLogin']);
+            $this->post('login', ['as' => 'admin.auth.login', 'middleware' => 'guest', 'uses' => 'AuthController@postLogin']);
+            $this->get('logout', ['as' => 'admin.auth.logout', 'middleware' => 'auth', 'uses' => 'AuthController@getLogout']);
+
+            // Registration Routes
+            $this->get('register', ['as' => 'admin.auth.register', 'middleware' => 'guest', 'uses' => 'AuthController@showRegistrationForm']);
+            $this->post('register', ['as' => 'admin.auth.register', 'middleware' => 'guest', 'uses' => 'AuthController@register']);
         });
     });
 });

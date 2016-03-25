@@ -11,7 +11,7 @@
     "doctrine/dbal": "^2.5",
     "symfony/polyfill-apcu": "^1.1",
     "laravelcollective/html": "5.2.*",
-    "unisharp/laravel-ckeditor": "^4.5"
+    "thomaswelton/laravel-gravatar": "~1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
