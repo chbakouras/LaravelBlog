@@ -17,6 +17,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle user-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span id="face-wrapper">
+                            <img src="{!! Gravatar::src(Auth::user()->email) !!}" alt="{{ Auth::user()->name }}" class="circle-img header-face" width="45" height="45" />
+                        </span>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">

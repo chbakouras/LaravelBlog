@@ -155,8 +155,19 @@
 .circle-img {
     background: no-repeat 50%;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+}
+
+#face-wrapper {
+    width:0;
+    height:0;
+    position: relative;
+    display: inherit;
+    right: 55px;
+}
+
+.header-face {
+    position: absolute;
+    top: -12px;
 }
 
 .vertical-align-middle {
