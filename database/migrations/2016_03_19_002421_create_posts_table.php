@@ -21,11 +21,11 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('type');
             $table->string('status');
-            $table->integer('author_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

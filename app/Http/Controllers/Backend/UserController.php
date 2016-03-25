@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\System\OptionRepository;
+use App\Repositories\System\PostRepository;
 use App\Repositories\System\UserRepository;
 use Illuminate\Http\Request;
 
@@ -122,13 +123,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param PostRepository $postRepository
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PostRepository $postRepository, $id)
     {
-        $this->userRepository
-            ->syncPosts($id);
+        $user = $this->userRepository->find($id);
+
+        if ($this->userRepository->countUserPosts($id)) {
+            $postRepository->forceDeleteAuthorPosts($user);
+        }
 
         $this->userRepository->destroy($id);
 

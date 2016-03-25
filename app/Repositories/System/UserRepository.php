@@ -19,8 +19,6 @@ interface UserRepository extends Repository
 
     public function eagerLoadAllPaginated($with, $perPage = 20);
 
-    public function syncPosts($id);
-
     public function syncRole($id, $roleId);
 
     public function countUserPosts($id);

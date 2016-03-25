@@ -36,7 +36,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = array('title', 'content', 'author_id', 'slug', 'excerpt', 'type');
+    protected $fillable = array('title', 'content', 'user_id', 'slug', 'excerpt', 'type');
 
     public $timestamps = true;
 
@@ -44,7 +44,7 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User', 'author_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function categories()

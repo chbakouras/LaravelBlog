@@ -38,6 +38,6 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'slug' => $faker->word,
         'type' => $faker->randomElement(array('post','page')),
         'status' => $faker->randomElement(Config::get('blog.post.status')),
-        'author_id' => 1,
+        'user_id' => 1,
     ];
 });

@@ -74,7 +74,7 @@ class PostController extends Controller
             'title' => Input::get('title'),
             'content' => Input::get('content'),
             'type' => Input::get('type'),
-            'author_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
         ];
         //TODO: Auto generate slug and excerpt with a service or an event - handler
         //TODO: Auto upload images from article links - Create an Upload controller? or a service?

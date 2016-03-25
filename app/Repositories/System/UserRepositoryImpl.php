@@ -26,12 +26,6 @@ class UserRepositoryImpl extends AbstractRepository implements UserRepository
         return $builder->paginate($perPage);
     }
 
-    public function syncPosts($id)
-    {
-        $user = $this->find($id);
-        $user->posts()->sync(array());
-    }
-
     public function syncRole($id, $roleId)
     {
         $user = $this->find($id);

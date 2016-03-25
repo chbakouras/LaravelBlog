@@ -76,7 +76,7 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         return $builder->first();
     }
 
-    public function syncCategories($id, $array)
+    public function syncCategories($id, $array = array())
     {
         if (empty($array)) {
             $array = array($this->optionRepository->findOptionIntegerValueByName('default-category-id'));
@@ -86,12 +86,8 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         $post->categories()->sync($array);
     }
 
-    public function syncCategoriesToModel(Model $post, $array)
+    public function syncCategoriesToModel(Model $post, $array = array())
     {
-        if (empty($array)) {
-            $array = array($this->optionRepository->findOptionIntegerValueByName('default-category-id'));
-        }
-
         $post->categories()->sync($array);
     }
 
@@ -122,5 +118,13 @@ class PostRepositoryImpl extends AbstractRepository implements PostRepository
         $this->syncCategoriesToModel($post, array());
 
         $post->forceDelete();
+    }
+
+    public function forceDeleteAuthorPosts($author)
+    {
+        $posts = $author->posts;
+        foreach ($posts as $post) {
+            $this->forceDelete($post->id);
+        }
     }
 }
