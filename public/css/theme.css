@@ -1,0 +1,39 @@
+.navbar, .navbar-default {
+    margin: 0 -15px;
+}
+
+.navbar-default {
+    background-color: #00b3a4 !important;
+    border-color: #00998c !important;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+    font-size: 18px;
+}
+
+.navbar-collapse > li > a {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7 !important;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: #00998c !important;
+    font-size: 18px !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-brand  > a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff !important;
+}

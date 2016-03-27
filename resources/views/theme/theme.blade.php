@@ -16,25 +16,28 @@
     $sidebar_right = false;
     ?>
 @endif
-@include('theme.partials.header')
-<div id="wrapper">
-    <div class="container">
-        <div class="row">
-            <div id="left-sidebar" class="col-lg-3 col-md-3">
-                @include('theme.partials.sidebar-left')
+
+<div class="container">
+    @include('theme.partials.header')
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <div id="left-sidebar" class="col-lg-3 col-md-3">
+                    @include('theme.partials.sidebar-left')
+                </div>
+                <div id="content-wrapper" class="{{ $content_class }}">
+                    @yield('content')
+                </div>
+                @if($sidebarRight)
+                    <div id="right-sidebar" class="col-md-3">
+                        @yield('sidebar-right')
+                    </div>
+                @endif
             </div>
-            <div id="content-wrapper" class="{{ $content_class }}">
-                @yield('content')
-            </div>
-            @if($sidebarRight)
-            <div id="right-sidebar" class="col-md-3">
-                @yield('sidebar-right')
-            </div>
-            @endif
         </div>
     </div>
+    @include('theme.partials.footer')
 </div>
-@include('theme.partials.footer')
 
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery-2.2.2.min.js') }}"></script>
