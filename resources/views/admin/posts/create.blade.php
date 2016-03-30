@@ -16,6 +16,28 @@
                 <textarea title="editor" id="editor" name="content">
                 </textarea>
             </div>
+
+            <div class="panel panel-default margin10">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Choose {{ ucfirst($postType) }} template:</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="view_template" value="{{ $postType }}Default"/>
+                            Default
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="view_template" value="twoColumns" />
+                            Two columns
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="view_template" value="threeColumns" />
+                            Three columns
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3">
             @include('admin.posts.partials.categories')

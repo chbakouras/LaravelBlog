@@ -17,8 +17,3 @@
         </ul>
     </div>
 </nav>
-
-<div class="logo-row row">
-    <div class="col-sm-3" style="background-color: #000; height:120px;"></div>
-    <div class="col-sm-3 col-sm-offset-6" style="background-color: #000;height:120px;"></div>
-</div>

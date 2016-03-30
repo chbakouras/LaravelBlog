@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Helpers\BlogHelper;
 use App\Http\Controllers\Controller;
 use App\Repositories\System\CategoryRepository;
 use App\Repositories\System\OptionRepository;
@@ -51,7 +52,16 @@ class BlogController extends Controller
     {
         $post = $this->postRepository->findBySlug($postSlug);
 
-        return view('theme.posts.show')
+        return view($post->view_template)
+            ->with('post', $post);
+    }
+
+    public function showFrontPage()
+    {
+        $frontPageId = $post = $this->optionRepository->findOptionIntegerValueByName('front-page-id');
+        $post = $this->postRepository->find($frontPageId);
+
+        return view($post->view_template)
             ->with('post', $post);
     }
 }

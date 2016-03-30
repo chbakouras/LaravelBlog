@@ -25,13 +25,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['web']], function () {
-    // Frontend
-    Route::group(['namespace' => 'Frontend'], function () {
-        // Post - Page with slug
-        Route::get('/{postSlug}/', 'BlogController@showSlug')
-            ->where('postSlug', '^(?!.*admin).*$');
-    });
-
     // Backend
     Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         Route::group(['middleware' => 'auth'], function () {
@@ -59,4 +52,14 @@ Route::group(['middleware' => ['web']], function () {
             $this->post('register', ['as' => 'admin.auth.register', 'middleware' => 'guest', 'uses' => 'AuthController@register']);
         });
     });
+    // Frontend
+    Route::group(['namespace' => 'Frontend'], function () {
+        // Front page
+        Route::get('/', 'BlogController@showFrontPage');
+        // Post - Page with slug
+        Route::get('/{postSlug}/', 'BlogController@showSlug');
+        // Post - page with id
+        Route::get('posts/{id}/', 'BlogController@show');
+    });
+
 });

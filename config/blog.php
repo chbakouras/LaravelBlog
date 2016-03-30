@@ -19,6 +19,13 @@ return [
             'trashed' => 'trashed',
             'draft' => 'draft',
         ],
+        'templates' => [
+            'twoColumns' => 'theme.two-columns',
+            'threeColumns' => 'theme.three-columns',
+            'frontPage' => 'theme.front-page',
+            'postDefault' => 'theme.two-columns',
+            'pageDefault' => 'theme.three-columns',
+        ],
     ],
 
     'show-all' => 'All',
@@ -38,6 +45,6 @@ return [
             'admin' => 'admin',
             'editor' => 'editor',
             'subscriber' => 'subscriber',
-        ]
+        ],
     ],
 ];

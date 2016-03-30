@@ -32,7 +32,11 @@
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>
-                    {{ $post->title }} <br>
+                    {{ $post->title }}
+                    @if(Blog::isFrontPageId($post->id))
+                        <strong>- Front Page</strong>
+                    @endif
+                    <br>
                     <div>
                         <a href="/{{ $post->slug }}" target="_blank">View</a>
                         <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}">Edit</a>

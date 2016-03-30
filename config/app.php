@@ -158,6 +158,7 @@ return [
 
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -211,6 +212,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+
+        'Blog' => App\Facades\BlogFacade::class,
     ],
 
 ];

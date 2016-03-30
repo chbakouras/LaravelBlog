@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 /**
  * Class Post
  * @property mixed type
+ * @property mixed id
  * @package App\Models
  */
 class Post extends Model
@@ -36,7 +37,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = array('title', 'content', 'user_id', 'slug', 'excerpt', 'type');
+    protected $fillable = array('title', 'content', 'user_id', 'slug', 'excerpt', 'type', 'view_template');
 
     public $timestamps = true;
 

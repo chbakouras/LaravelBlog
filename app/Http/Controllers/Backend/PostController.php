@@ -13,6 +13,7 @@ use App\Repositories\System\PostRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -74,6 +75,7 @@ class PostController extends Controller
             'title' => Input::get('title'),
             'content' => Input::get('content'),
             'type' => Input::get('type'),
+            'view_template' => Input::has('view_template') ? Config::get('blog.post.templates.' . Input::get('view_template')) : Config::get('blog.post.templates' . Input::get('type') . 'Default'),
             'user_id' => Auth::user()->id,
         ];
         //TODO: Auto generate slug and excerpt with a service or an event - handler
@@ -101,7 +103,7 @@ class PostController extends Controller
             abort(404);
         }
 
-        return view('theme.posts.show')
+        return view($post->view_template)
             ->with('post', $post);
     }
 
@@ -132,6 +134,7 @@ class PostController extends Controller
             'title' => Input::get('title'),
             'content' => Input::get('content'),
             'type' => Input::get('type'),
+            'view_template' => Input::has('view_template') ? Config::get('blog.post.templates.' . Input::get('view_template')) : Config::get('blog.post.templates' . Input::get('type') . 'Default'),
         );
 
         $this->postRepository->update($data, $id);

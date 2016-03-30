@@ -2,6 +2,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <link href="{{ asset('/css/theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('/theme/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{asset('vendor/font-awesome/css/font-awesome.css')}}" rel="stylesheet">

@@ -31,13 +31,15 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    $type = $faker->randomElement(array('post','page'));
     return [
         'title' => $faker->sentence,
         'content' => $faker->text($maxNbChars = 500),
         'excerpt' => $faker->text($maxNbChars = 100),
         'slug' => $faker->word,
-        'type' => $faker->randomElement(array('post','page')),
+        'type' => $type,
         'status' => $faker->randomElement(Config::get('blog.post.status')),
+        'view_template' => Config::get('blog.post.templates.' . $type . 'Default'),
         'user_id' => 1,
     ];
 });
